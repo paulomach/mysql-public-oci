@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		perl \
 # install "xz-utils" for .sql.xz docker-entrypoint-initdb.d files
 		xz-utils \
+        tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
