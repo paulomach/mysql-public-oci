@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+    mysql:
+        image: squeakywheel/mysql:edge
+        network_mode: "host"
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            - MYSQL_PASSWORD=myS&cret
+            - MYSQL_USER=john
+        volumes:
+            - ./config/my-custom.cnf:/etc/mysql/mysql.conf.d/my-custom.cnf
