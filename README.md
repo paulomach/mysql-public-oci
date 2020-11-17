@@ -20,9 +20,10 @@ of use. Read more on the [MySQL website](https://dev.mysql.com/doc/refman/8.0/en
 ### Docker CLI
 
 ```sh
-$ docker network create --driver bridge mysql-net
-$ docker run -d --name mysql-instance --network mysql-net -e TZ=Europe/London -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ squeakywheel/mysql:edge
+$ docker run -d --name mysql-container -p 30306:3306 -e TZ=Europe/London -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ squeakywheel/mysql:edge
 ```
+
+Access your MySQL server at `localhost:30306`.
 
 #### Parameters
 
@@ -62,8 +63,11 @@ $ docker exec -it <name_of_the_container> /bin/bash
 With this same image, you can launch an interactive container as a client to connect to your `mysql` server running in the first container.
 
 ```sh
-$ docker run -it --rm --network mysql-net squeakywheel/mysql:edge mysql -hmysql-instance -uroot -p
+$ docker network create mysql-net
+$ docker network connect mysql-net mysql-container
+$ docker run -it --rm --network mysql-net squeakywheel/mysql:edge mysql -hmysql-container -uroot -p
 ```
+
 The password will be asked and you can enter `My:S3cr3t/`. Now, you are logged in and can enjoy your new instance.
 
 ## Deploy with Kubernetes
@@ -161,7 +165,6 @@ spec:
     nodePort: 30306
     name: mysql
 ```
-
 </details>
 
 ```sh
