@@ -36,7 +36,10 @@ $ docker run -d --name mysql-instance --network mysql-net -e TZ=Europe/London -e
 | `-e MYSQL_ALLOW_EMPTY_PASSWORD=yes` | Set up a blank password for the `root` user. **This is not recommended to be used in production, make sure you know what you are doing**. |
 | `-e MYSQL_RANDOM_ROOT_PASSWORD=yes` | Generate a random initial password for the `root` user using `pwgen`. It will be printed in the logs, search for `GENERATED ROOT PASSWORD`. |
 | `-e MYSQL_ONETIME_PASSWORD=yes` | Set `root` user as experide once initialization is complete, forcing a password change on first login. |
-| `-e MYSQL_INITSB_SKIP_TZINFO=yes` | Timezone data is automatically loaded via entrypoint script, set this variable to any non-empty value to disable it. | 
+| `-e MYSQL_INITSB_SKIP_TZINFO=yes` | Timezone data is automatically loaded via entrypoint script, set this variable to any non-empty value to disable it. |
+| `-p 30306:3306` | Expose MySQL server on `localhost:30306` |
+| `-v /path/to/data:/var/lib/mysql` | Persist data instead of initializing a new database every time you launch a new container |
+| `-v /path/to/config/files/:/etc/mysql/mysql.conf.d/` | Pass your own [configuration files](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html) to the container |
 
 #### Initialization Scripts
 
