@@ -59,7 +59,7 @@ In case you need to debug what it is happening with the container you can run `d
 $ docker exec -it <name_of_the_container> /bin/bash
 ```
 
-With this same image, you can launch another container as a client to connect to your `mysql` sevrer running in the first container.
+With this same image, you can launch an interactive container as a client to connect to your `mysql` server running in the first container.
 
 ```sh
 $ docker run -it --rm --network mysql-net squeakywheel/mysql:edge mysql -hmysql-instance -uroot -p
