@@ -21,7 +21,7 @@ of use. Read more in [the official documentation](https://dev.mysql.com/doc/refm
 
 ```sh
 $ docker network create --driver bridge mysql-net
-$ docker run -d --name mysql-instance --network mysql-net -e TZ=Europe/London -e MYSQL_ROOT_PASSWORD=My$seCret squeakywheel/mysql:edge
+$ docker run -d --name mysql-instance --network mysql-net -e TZ=Europe/London -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ squeakywheel/mysql:edge
 ```
 
 #### Parameters
@@ -64,7 +64,7 @@ With this same image, you can launch another container as a client to connect to
 ```sh
 $ docker run -it --rm --network mysql-net squeakywheel/mysql:edge mysql -hmysql-instance -Uroot -p
 ```
-The password will be asked and you can enter `My$seCret`. Now, you are logged in and can enjoy your new instance.
+The password will be asked and you can enter `My:S3cr3t/`. Now, you are logged in and can enjoy your new instance.
 
 ## Deploy with Kubernetes
 
