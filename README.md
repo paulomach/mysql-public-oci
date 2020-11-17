@@ -5,7 +5,7 @@
 MySQL is a fast, stable and true multi-user, multi-threaded SQL database
 server. SQL (Structured Query Language) is the most popular database query
 language in the world. The main goals of MySQL are speed, robustness and ease
-of use. Read more in [the official documentation](https://dev.mysql.com/doc/refman/8.0/en/).
+of use. Read more on the [MySQL website](https://dev.mysql.com/doc/refman/8.0/en/).
 
 ## Tags
 
