@@ -20,19 +20,8 @@ of use. Read more in [the official documentation](https://dev.mysql.com/doc/refm
 ### Docker CLI
 
 ```sh
-$ docker network create mysql-net
-# Run the server
-$ docker run --name mysql-instance --network mysql-net --env MYSQL_ROOT_PASSWORD=My$seCret --detach squeakywheel/mysql:edge
-# Run the client
-$ docker run --interactive --tty --rm --network mysql-net squeakywheel/mysql:edge mysql -hmysql-instance -Uroot -p
-```
-
-The password will be asked and you can enter `My$seCret`. Now, you are logged in and can enjoy your new instance.
-
-Since containers are ephemeral you might be interested in persist data and not initialize a new database every time you launch a new container. To do that you can use docker volumes:
-
-```sh
-$ docker run --name mysql --volume /path/to/persisted/data:/var/lib/mysql --env MYSQL_RANDOM_ROOT_PASSWORD=yes squeakywheel/mysql:edge
+$ docker network create --driver bridge mysql-net
+$ docker run -d --name mysql-instance --network mysql-net -e TZ=Europe/London -e MYSQL_ROOT_PASSWORD=My$seCret squeakywheel/mysql:edge
 ```
 
 #### Parameters
@@ -59,15 +48,7 @@ One can also add initialization scripts to their containers. This includes `*.sq
 
 All of this is done before the MySQL service is started. Keep in mind if your database directory is not empty (contains pre-existing database) they will be left untouched.
 
-#### Database Configuration
-
-You can pass your own configuration files to the container doing the following:
-
-```sh
-$ docker run --name mysql --volume /path/to/mysql/config/files/:/etc/mysql/mysql.conf.d/ --env MYSQL_ROOT_PASSWORD=P@sSwd squeakywheel/mysql:edge
-```
-
-#### Debugging
+#### Testing/Debugging
 
 In case you need to debug what it is happening with the container you can run `docker logs <name_of_the_container>`. But if you want to get access to an interactive shell run:
 
@@ -75,7 +56,12 @@ In case you need to debug what it is happening with the container you can run `d
 $ docker exec -it <name_of_the_container> /bin/bash
 ```
 
-To see how to use the MySQL OCI image with `docker-compose` and `kubernetes` check the `examples/README.md` file.
+With this same image, you can launch another container as a client to connect to your `mysql` sevrer running in the first container.
+
+```sh
+$ docker run -it --rm --network mysql-net squeakywheel/mysql:edge mysql -hmysql-instance -Uroot -p
+```
+The password will be asked and you can enter `My$seCret`. Now, you are logged in and can enjoy your new instance.
 
 ## Deploy with Kubernetes
 
