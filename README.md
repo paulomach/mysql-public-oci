@@ -20,7 +20,7 @@ of use. Read more on the [MySQL website](https://dev.mysql.com/doc/refman/8.0/en
 ### Docker CLI
 
 ```sh
-$ docker run -d --name mysql-container -p 30306:3306 -e TZ=Europe/London -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ squeakywheel/mysql:edge
+$ docker run -d --name mysql-container -p 30306:3306 -e TZ=UTC -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ squeakywheel/mysql:edge
 ```
 
 Access your MySQL server at `localhost:30306`.
