@@ -85,7 +85,7 @@ Create a configmap for the configuration file (write your `my.cnf` file based on
 $ microk8s kubectl create configmap mysql-config --from-file=main-config=config/my-custom.cnf
 ```
 
-Use the sample deployment yaml provided [here](https://git.launchpad.net/~canonical-server/ubuntu-server-oci/+git/mysql/plain/examples/mysql-deployment.yml).
+Use the sample deployment yaml provided [here](https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/mysql-deployment.yml).
 
 <details>
   <summary>Apply the `mysql-deployment.yml` (click to expand)</summary>
@@ -177,7 +177,7 @@ You will now be able to connect to the MySQL server on `localhost:30306`.
 
 If you find a bug in our image or want to request a specific feature file a bug here:
 
-https://bugs.launchpad.net/ubuntu-server-oci/+filebug
+https://bugs.launchpad.net/ubuntu-docker-images/+filebug
 
 In the title of the bug add `mysql: <reason>`.
 
