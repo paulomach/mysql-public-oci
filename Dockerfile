@@ -34,7 +34,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-cl
 	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql /var/run/mysqld \
 	&& chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
-	&& chmod 1777 /var/run/mysqld /var/lib/mysql
+	&& chmod 1777 /var/run/mysqld /var/lib/mysql \
+# create manifest
+	&& mkdir -p /usr/share/rocks \
+	&& (echo "# os-release" && cat /etc/os-release && echo "# dpkg-query" && dpkg-query -f '${db:Status-Abbrev},${binary:Package},${Version},${source:Package},${Source:Version}\n' -W) > /usr/share/rocks/dpkg.query
 
 VOLUME /var/lib/mysql
 # Config files
