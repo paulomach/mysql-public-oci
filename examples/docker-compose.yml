@@ -2,7 +2,7 @@ version: '2'
 
 services:
     mysql:
-        image: squeakywheel/mysql:edge
+        image: ubuntu/mysql:edge
         network_mode: "host"
         ports:
             - 3306:3306

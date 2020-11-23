@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: squeakywheel/mysql:edge
+        image: ubuntu/mysql:edge
         env:
         - name: MYSQL_RANDOM_ROOT_PASSWORD
           value: "yes"

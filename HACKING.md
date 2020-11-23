@@ -7,7 +7,7 @@ In order to contribute to the MySQL OCI image do the following:
 * Build a new image with your changes. You can use the following command:
 
 ```
-$ docker build -t squeakywheel/mysql:test -f Dockerfile .
+$ docker build -t ubuntu/mysql:test -f Dockerfile .
 ```
 
 * Test the new image. Run it in some way that exercises your changes, you can also check th README.md file.

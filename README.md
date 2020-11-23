@@ -20,7 +20,7 @@ of use. Read more on the [MySQL website](https://dev.mysql.com/doc/refman/8.0/en
 ### Docker CLI
 
 ```sh
-$ docker run -d --name mysql-container -p 30306:3306 -e TZ=UTC -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ squeakywheel/mysql:edge
+$ docker run -d --name mysql-container -p 30306:3306 -e TZ=UTC -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ ubuntu/mysql:edge
 ```
 
 Access your MySQL server at `localhost:30306`.
@@ -65,7 +65,7 @@ With this same image, you can launch an interactive container as a client to con
 ```sh
 $ docker network create mysql-net
 $ docker network connect mysql-net mysql-container
-$ docker run -it --rm --network mysql-net squeakywheel/mysql:edge mysql -hmysql-container -uroot -p
+$ docker run -it --rm --network mysql-net ubuntu/mysql:edge mysql -hmysql-container -uroot -p
 ```
 
 The password will be asked and you can enter `My:S3cr3t/`. Now, you are logged in and can enjoy your new instance.
@@ -121,7 +121,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: squeakywheel/mysql:edge
+        image: ubuntu/mysql:edge
         env:
         - name: MYSQL_RANDOM_ROOT_PASSWORD
           value: "yes"
@@ -185,7 +185,7 @@ Make sure to include:
 
 * The digest of the image you are using, you can find it using this command replacing `<tag>` with the one you used to run the image:
 ```sh
-$ docker images --no-trunc --quiet squeakywheel/mysql:<tag>
+$ docker images --no-trunc --quiet ubuntu/mysql:<tag>
 ```
 * Reproduction steps for the deployment
 * If it is a feature request, please provide as much detail as possible
