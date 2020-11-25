@@ -1,4 +1,5 @@
 application: MySQL
+main: true
 repo: mysql
 description: >
   MySQL is a fast, stable and true multi-user, multi-threaded SQL database
@@ -52,7 +53,7 @@ parameters:
     description: Persist data instead of initializing a new database every time you launch a new container.
   - type: -v
     value: /path/to/config/files/:/etc/mysql/mysql.conf.d/
-    description: Local [configuration files](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html) (try this [example my.cnf](https://git.launchpad.net/~canonical-server/ubuntu-server-oci/+git/mysql/plain/examples/config/my.cnf)).
+    description: Local [configuration files](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html) (try this [example my.cnf](https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/config/my.cnf)).
 debug:
   extraparagraph: |
     #### Initialization Scripts
@@ -71,9 +72,9 @@ debug:
 microk8s:
   configmap:
     files:
-      - key: mysql
-        name: my.cnf
-        link: https://git.launchpad.net/~canonical-server/ubuntu-server-oci/+git/mysql/plain/examples/config/my.cnf
+      - key: main-config
+        name: my-custom.cnf
+        link: https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/config/my-custom.cnf
   deploy:
-    link: https://git.launchpad.net/~canonical-server/ubuntu-server-oci/+git/mysql/plain/examples/mysql-deployment.yml
+    link: https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/mysql-deployment.yml
     access: You will now be able to connect to the MySQL server on `localhost:30306`.

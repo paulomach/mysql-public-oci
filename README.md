@@ -49,7 +49,7 @@ Access your MySQL server at `localhost:30306`.
 | `-e MYSQL_INITSB_SKIP_TZINFO=yes` | Timezone data is automatically loaded via entrypoint script, set this variable to any non-empty value to disable it. |
 | `-p 30306:3306` | Expose MySQL server on `localhost:30306`. |
 | `-v /path/to/data:/var/lib/mysql` | Persist data instead of initializing a new database every time you launch a new container. |
-| `-v /path/to/config/files/:/etc/mysql/mysql.conf.d/` | Local [configuration files](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html) (try this [example my.cnf](https://git.launchpad.net/~canonical-server/ubuntu-server-oci/+git/mysql/plain/examples/config/my.cnf)). |
+| `-v /path/to/config/files/:/etc/mysql/mysql.conf.d/` | Local [configuration files](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html) (try this [example my.cnf](https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/config/my.cnf)). |
 
 #### Initialization Scripts
 
@@ -90,11 +90,11 @@ The password will be asked and you can enter `My:S3cr3t/`. Now, you are logged i
 Works with any Kubernetes; if you don't have one, we recommend you [install MicroK8s](https://microk8s.io/) and `microk8s.enable dns storage` then `snap alias microk8s.kubectl kubectl`.
 
 Download
-[my.cnf](https://git.launchpad.net/~canonical-server/ubuntu-server-oci/+git/mysql/plain/examples/config/my.cnf) and
-[mysql-deployment.yml](https://git.launchpad.net/~canonical-server/ubuntu-server-oci/+git/mysql/plain/examples/mysql-deployment.yml) and set `containers.mysql.image` in `mysql-deployment.yml` to your chosen channel tag (e.g. `ubuntu/mysql:8.0-20.04_beta`), then:
+[my-custom.cnf](https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/config/my-custom.cnf) and
+[mysql-deployment.yml](https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/mysql-deployment.yml) and set `containers.mysql.image` in `mysql-deployment.yml` to your chosen channel tag (e.g. `ubuntu/mysql:8.0-20.04_beta`), then:
 
 ```sh
-kubectl create configmap mysql-config --from-file=mysql=my.cnf
+kubectl create configmap mysql-config --from-file=main-config=my-custom.cnf
 kubectl apply -f mysql-deployment.yml
 ```
 
