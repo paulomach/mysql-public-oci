@@ -5,20 +5,14 @@ README_TEMPLATE = templates/README_DOCKERHUB.md
 
 HACKING_TEMPLATE = templates/HACKING_deb.md
 
-TEMPLATE_FILES = $(README_TEMPLATE) \
-	$(HACKING_TEMPLATE) \
-	templates/channels_message.md \
-	templates/common_usage.md \
-	templates/header.md
-
 all: all-doc
 
 all-doc: clean-doc readme
 
-templates/%.md:
-	curl https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/templates/plain/$@ --create-dirs --output $@
+get-templates:
+	wget -nv -e "robots=off" -nd -r -np -P templates https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/templates/plain/templates/
 
-readme: $(TEMPLATE_FILES)
+readme: get-templates
 	mv -v $(README_TEMPLATE) templates/README.md
 	mv -v $(HACKING_TEMPLATE) templates/HACKING.md
 	$(PYTHON) $(RENDERDOWN) templates/README.md > README.md
@@ -27,6 +21,6 @@ readme: $(TEMPLATE_FILES)
 clean: clean-doc
 
 clean-doc:
-	rm -frv $(TEMPLATE_FILES) templates/ README.md
+	rm -frv templates/ README.md
 
-.PHONY: readme clean clean-doc all all-doc
+.PHONY: readme clean clean-doc all all-doc get-templates
