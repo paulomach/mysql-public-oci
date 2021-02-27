@@ -25,6 +25,7 @@ RUN apt-get update; \
 		xz-utils \
 		tzdata \
 		; \
+	DEBIAN_FRONTEND=noninteractive apt-get remove --purge --auto-remove -y;
 	rm -rf /var/lib/apt/lists/*
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
