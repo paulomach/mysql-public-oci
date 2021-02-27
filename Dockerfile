@@ -4,13 +4,7 @@ ENV TZ UTC
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mysql; \
-    useradd -r -g mysql mysql;
-
-RUN set -eux; \
-	apt-get update; \
-	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends gosu; \
-	rm -rf /var/lib/apt/lists/*; \
-	gosu nobody true;
+	useradd -r -g mysql mysql;
 
 RUN mkdir /docker-entrypoint-initdb.d
 
@@ -28,7 +22,7 @@ RUN apt-get update; \
 		perl \
 # install "xz-utils" for .sql.xz docker-entrypoint-initdb.d files
 		xz-utils \
-        tzdata \
+		tzdata \
 		; \
 	rm -rf /var/lib/apt/lists/*
 
@@ -36,7 +30,7 @@ RUN apt-get update; \
 RUN apt-get update; \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client-8.0 mysql-server-core-8.0; \
 	rm -rf /var/lib/apt/lists/*; \
-    rm -rf /var/lib/mysql; \
+	rm -rf /var/lib/mysql; \
 	mkdir -p /var/lib/mysql /var/run/mysqld; \
 	chown -R mysql:mysql /var/lib/mysql /var/run/mysqld; \
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
