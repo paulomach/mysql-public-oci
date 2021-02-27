@@ -8,7 +8,9 @@ RUN groupadd -r mysql; \
 
 RUN mkdir /docker-entrypoint-initdb.d
 
-RUN apt-get update; \
+RUN set -eux; \
+# installation
+	apt-get update; \
 	DEBIAN_FRONTEND=noninteractive apt-get full-upgrade -y; \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 # for MYSQL_RANDOM_ROOT_PASSWORD
@@ -29,7 +31,8 @@ RUN apt-get update; \
 	rm -rf /var/lib/apt/lists/*
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
-RUN apt-get update; \
+RUN set -eux; \
+	apt-get update; \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 		mysql-client-8.0 \
 		mysql-server-core-8.0 \
