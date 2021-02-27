@@ -9,6 +9,7 @@ RUN groupadd -r mysql; \
 RUN mkdir /docker-entrypoint-initdb.d
 
 RUN apt-get update; \
+	DEBIAN_FRONTEND=noninteractive apt-get full-upgrade -y; \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 # for MYSQL_RANDOM_ROOT_PASSWORD
 		pwgen \
