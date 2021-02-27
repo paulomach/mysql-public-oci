@@ -28,7 +28,10 @@ RUN apt-get update; \
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
 RUN apt-get update; \
-	DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client-8.0 mysql-server-core-8.0; \
+	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+		mysql-client-8.0 \
+		mysql-server-core-8.0 \
+		; \
 	rm -rf /var/lib/apt/lists/*; \
 	rm -rf /var/lib/mysql; \
 	mkdir -p /var/lib/mysql /var/run/mysqld; \
