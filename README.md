@@ -19,7 +19,7 @@ _Tags in italics are not available in ubuntu/mysql but are shown here for comple
 
 | Channel Tag | | | Currently | Architectures |
 |---|---|---|---|---|
-| **`8.0-20.04_beta`** &nbsp;&nbsp; | | | MySQL 8.0.22 on Ubuntu 20.04 LTS | `amd64`, `arm64`, `s390x` |
+| **`8.0-21.04_beta`** &nbsp;&nbsp; | | | MySQL 8.0.23 on Ubuntu 21.04 LTS | `amd64`, `arm64`, `s390x` |
 | _`track_risk`_ |
 
 Channel tag shows the most stable channel for that track ordered `stable`, `candidate`, `beta`, `edge`. More risky channels are always implicitly available. So if `beta` is listed, you can also pull `edge`. If `candidate` is listed, you can pull `beta` and `edge`. When `stable` is listed, all four are available. Images are guaranteed to progress through the sequence `edge`, `beta`, `candidate` before `stable`.
@@ -30,7 +30,7 @@ Channel tag shows the most stable channel for that track ordered `stable`, `cand
 Launch this image locally:
 
 ```sh
-docker run -d --name mysql-container -e TZ=UTC -p 30306:3306 -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ ubuntu/mysql:8.0-20.04_beta
+docker run -d --name mysql-container -e TZ=UTC -p 30306:3306 -e MYSQL_ROOT_PASSWORD=My:S3cr3t/ ubuntu/mysql:8.0-21.04_beta
 ```
 Access your MySQL server at `localhost:30306`.
 
@@ -81,7 +81,7 @@ This image also includes the `mysql` client for interactive container use:
 ```sh
 $ docker network create mysql-network
 $ docker network connect mysql-network mysql-container
-$ docker run -it --rm --network mysql-network ubuntu/mysql:8.0-20.04_beta mysql -hmysql-container -uroot -p
+$ docker run -it --rm --network mysql-network ubuntu/mysql:8.0-21.04_beta mysql -hmysql-container -uroot -p
 ```
 The password will be asked and you can enter `My:S3cr3t/`. Now, you are logged in and can enjoy your new instance.
 
@@ -91,7 +91,7 @@ Works with any Kubernetes; if you don't have one, we recommend you [install Micr
 
 Download
 [my-custom.cnf](https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/config/my-custom.cnf) and
-[mysql-deployment.yml](https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/mysql-deployment.yml) and set `containers.mysql.image` in `mysql-deployment.yml` to your chosen channel tag (e.g. `ubuntu/mysql:8.0-20.04_beta`), then:
+[mysql-deployment.yml](https://git.launchpad.net/~canonical-server/ubuntu-docker-images/+git/mysql/plain/examples/mysql-deployment.yml) and set `containers.mysql.image` in `mysql-deployment.yml` to your chosen channel tag (e.g. `ubuntu/mysql:8.0-21.04_beta`), then:
 
 ```sh
 kubectl create configmap mysql-config --from-file=main-config=my-custom.cnf

@@ -1,7 +1,7 @@
 # Contributing
 
 In Ubuntu, MySQL is available as a `.deb` package.  For this reason,
-this image was built by installing the MySQL Ubuntu Focal package
+this image was built by installing the MySQL Ubuntu 21.04 LTS package
 inside a docker container.
 
 In order to contribute to the MySQL OCI image, do the following:
