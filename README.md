@@ -19,7 +19,7 @@ _Tags in italics are not available in ubuntu/mysql but are shown here for comple
 
 | Channel Tag | | | Currently | Architectures |
 |---|---|---|---|---|
-| **`8.0-21.04_beta`** &nbsp;&nbsp; | | | MySQL 8.0.23 on Ubuntu 21.04 LTS | `amd64`, `arm64`, `s390x` |
+| **`8.0-21.04_beta`** &nbsp;&nbsp; | | | MySQL 8.0.23 on Ubuntu 21.04 | `amd64`, `arm64`, `s390x` |
 | _`track_risk`_ |
 
 Channel tag shows the most stable channel for that track ordered `stable`, `candidate`, `beta`, `edge`. More risky channels are always implicitly available. So if `beta` is listed, you can also pull `edge`. If `candidate` is listed, you can pull `beta` and `edge`. When `stable` is listed, all four are available. Images are guaranteed to progress through the sequence `edge`, `beta`, `candidate` before `stable`.
