@@ -26,6 +26,8 @@ RUN set -eux; \
 # install "xz-utils" for .sql.xz docker-entrypoint-initdb.d files
 		xz-utils \
 		tzdata \
+# Required by docker-entrypoint.sh
+		gosu \
 		; \
 	DEBIAN_FRONTEND=noninteractive apt-get remove --purge --auto-remove -y;
 	rm -rf /var/lib/apt/lists/*
