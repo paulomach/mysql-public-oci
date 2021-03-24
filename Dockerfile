@@ -29,7 +29,7 @@ RUN set -eux; \
 # Required by docker-entrypoint.sh
 		gosu \
 		; \
-	DEBIAN_FRONTEND=noninteractive apt-get remove --purge --auto-remove -y;
+	DEBIAN_FRONTEND=noninteractive apt-get remove --purge --auto-remove -y; \
 	rm -rf /var/lib/apt/lists/*
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
@@ -45,6 +45,8 @@ RUN set -eux; \
 	chown -R mysql:mysql /var/lib/mysql /var/run/mysqld; \
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
 	chmod 1777 /var/run/mysqld /var/lib/mysql; \
+# smoke test
+	gosu nobody true; \
 # create manifest
 	mkdir -p /usr/share/rocks; \
 	(echo "# os-release" && cat /etc/os-release && echo "# dpkg-query" && dpkg-query -f '${db:Status-Abbrev},${binary:Package},${Version},${source:Package},${Source:Version}\n' -W) > /usr/share/rocks/dpkg.query;
